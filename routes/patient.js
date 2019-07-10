@@ -70,6 +70,13 @@ router.post('/getactivity',ensureAuthenticated,(req,res,next)=>{
         res.json(record);
     })
 }) 
+
+router.get("/edit/:id",(req,res,next) => {
+    var id = req.params.id;
+    Patient.findById(id).then(patient => {
+        res.render("edit.html",{patient : patient});
+    })
+})
  
 
 //Check whether user is authenticted or not

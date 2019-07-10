@@ -726,6 +726,7 @@ tatuspre                       <span aria-hidden="true">×</span>
                                       <th scope="col">Doctor</th>
                                       
                                       <th scope="col">Medicine</th>
+                                      <th scope="col">Editing</th>
 
                                     </tr>
                                   </thead>
@@ -754,6 +755,8 @@ tatuspre                       <span aria-hidden="true">×</span>
                                                     </div>
                                                     {{/each}}
                                                 </ol></td>
+                                        <td><a href="/patient/edit/{{this._id}}" class="btn btn-small btn-info">Edit</a></td>
+
                                     </tr>
                                     {{/iff}}
                                         {{/each}}
