@@ -73,14 +73,15 @@
                                                                     <input type="number" class="form-control" id="rollnumber" placeholder="Roll Number" min="1" required style="border-radius: 5px" value="{{patient.idnumber}}">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <input type="text" class="form-control" id="diseases" placeholder="Disease Name(Optional)" style="border-radius: 5px">
+                                                                    <input type="text" class="form-control" id="diseases" placeholder="Disease Name(Optional)" style="border-radius: 5px"
+                                                                    value="{{patient.diseases}}">
                                                                 </div>
                                                                 <div class="form-group" >
-                                                                    <textarea rows="4" placeholder="Description of Disease(Optional)" class="form-control" name="diseaseDescription"    id="diseaseDescription" width></textarea>
+                                                                    <textarea rows="4" placeholder="Description of Disease(Optional)" class="form-control" name="diseaseDescription"    id="diseaseDescription" width>{{patient.diseaseDescription}}</textarea>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <select class="form-control" id="doctorName" style="border-radius: 5px">
-                                                                        <option>Select Doctor Name</option>
+                                                                        <option selected>{{patient.doctorName}}</option>
                                                                         <option value="Dr. G.S. Sandhu">Dr. G.S. Sandhu</option>
                                                                         <option value="Dr. A.N .Gupta">Dr. A.N .Gupta</option>
                                                                         <option value="Dr. Jyoti Garg">Dr. Jyoti Garg</option>
@@ -90,7 +91,8 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <div id="more">
-                                                                        <div class="row">
+                                                                   
+                                                                       <!--  <div class="row">
                                                                             <div class="col-md-9 col-sm- col-xs-12">
                                                                                 <input type="text" class="form-control" placeholder="Medicine Name" required id="medicineName0" style="border-radius: 5px">
                                                                             </div>
@@ -98,7 +100,7 @@
                                                                                 <input type="number" class="form-control" placeholder="quantity" required id="medicineQuantity0" style="border-radius: 5px" min="1">
                                                                             </div>
                                                                             <div role="button" class="btn btndanger delmedicine"></div>
-                                                                        </div>
+                                                                        </div> -->
 
                                                                     </div>
                                                                     <br>
@@ -406,6 +408,32 @@
 <script src="../js/tej.js"></script>
 
 <script>
+// var moreHtml = '<div class="row "><div class="col-md-8 col-sm-8 col-xs-12">'+
+//         '<input type="text" list="datalist"  class="form-control"  placeholder="Medicine Name"   required id="employeemedicineName' + 0 + '">'+
+//         '</div><div class="col-md-4 col-sm-4 col-xs-12">'+
+//         '<input type="number"  class="form-control"  placeholder="Medicine quantity"   required id="employeemedicineQuantity' + 0 + '">'+
+//         '</div><button onclick="hello(this);" class="delmedicine my-2 btn btn-xs "></button></div>'
+var moreHtml = "";
+ for(i=0 ; i<{{patient.medicineName.length}} ; i++){
+     moreHtml += '<div class="row "><div class="col-md-8 col-sm-8 col-xs-12">'+
+'<input type="text" list="datalist"  class="form-control" ' 
+        + 'placeholder="Medicine Name"   required id="employeemedicineName' + i + '">'+
+        '</div><div class="col-md-4 col-sm-4 col-xs-12">'+
+        '<input type="number"  class="form-control"  placeholder="Medicine quantity"   required id="employeemedicineQuantity' + i + '">'+
+        '</div><button onclick="hello(this);" class="delmedicine my-2 btn btn-xs btn-danger">Delete</button></div>'
+    
+ }
+
+
+
+
+ document.getElementById("more").insertAdjacentHTML("beforeEnd",moreHtml);
+
+ for(i=0 ;i<{{patient.medicineName.length}} ; i++ ){
+    var name1="{{medicines}}"[0].name;
+    document.getElementById("employeemedicineName" + i ).setAttribute("value",name1); 
+ }
+
 '{{#if compounder.completed}}'
 function editProfile() {
     console.log("In edit profile");
